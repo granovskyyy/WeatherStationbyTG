@@ -27,23 +27,7 @@ Project File Date:  01/08/2026
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'FRDM-KL05ZJ'
-main.c(48): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        uint16_t rawT = ((uint16_t)data[0] << 8) | data[1];
-                 ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-main.c(49): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
-        uint16_t rawH = ((uint16_t)data[3] << 8) | data[4];
-                 ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-main.c(56): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
-        int t_dec = (int)((temperature - t_int) * 10);
-                                       ~ ^~~~~
-main.c(58): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
-        int h_dec = (int)((humidity - h_int) * 10);
-                                    ~ ^~~~~
-4 warnings generated.
-compiling main.c...
-linking...
-Program Size: Code=4300 RO-data=372 RW-data=4 ZI-data=360  
-".\Objects\weatherstation.axf" - 0 Error(s), 4 Warning(s).
+".\Objects\weatherstation.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
