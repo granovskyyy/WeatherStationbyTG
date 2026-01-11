@@ -13,8 +13,8 @@
 #define LED_G		(1<<9)		// Maska dla diody czerwonej (G)
 #define LED_B		(1<<10)		// Maska dla diody czerwonej (B)
 
-float T_min = 18.0, T_max = 28.0;
-float H_min = 30.0, H_max = 70.0;
+float T_min = 18.0, T_max = 24.0;
+float H_min = 30.0, H_max = 60.0;
 
 void LED_Init(void)
 {
@@ -101,13 +101,31 @@ int main(void)
 
 				if(alarmT) PTB->PCOR = LED_R;      // czerwona – temperatura
 				if(alarmH) PTB->PCOR = LED_B;     // niebieska – wilgotnosc
+				if(alarmT && alarmH)
+				{
+						for(int k=0; k<5; k++)
+						{
+								// temperatura - czerwony
+								PTB->PCOR = LED_R;
+								PTB->PSOR = LED_B;
+								for(volatile int d=0; d<200000; d++);
+								PTB->PCOR = LED_B;
+								PTB->PSOR = LED_R;
+								for(volatile int d=0; d<200000; d++);
+						}
+				}
 
-					
         /* --- Formatowanie bez %f --- */
         int t_int = (int)temperature;
         int t_dec = (int)((temperature - t_int) * 10);
         int h_int = (int)humidity;
         int h_dec = (int)((humidity - h_int) * 10);
+				
+				// --- czyszczenie linii LCD po alarmach ---
+				LCD1602_SetCursor(0,0);
+				LCD1602_Print("                ");
+				LCD1602_SetCursor(0,1);
+				LCD1602_Print("                ");
 
         /* --- LCD --- */
         sprintf(buf,"T: %2d.%1d C", t_int, t_dec);
@@ -121,6 +139,3 @@ int main(void)
         for(volatile int i=0;i<500000;i++);
     }
 }
-
-
-

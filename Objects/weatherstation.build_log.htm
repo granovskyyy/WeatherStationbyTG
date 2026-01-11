@@ -27,7 +27,79 @@ Project File Date:  01/08/2026
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'FRDM-KL05ZJ'
-".\Objects\weatherstation.axf" - 0 Error(s), 0 Warning(s).
+main.c(16): warning: no previous extern declaration for non-static variable 'T_min' [-Wmissing-variable-declarations]
+float T_min = 18.0, T_max = 24.0;
+      ^
+main.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+float T_min = 18.0, T_max = 24.0;
+^
+main.c(16): warning: no previous extern declaration for non-static variable 'T_max' [-Wmissing-variable-declarations]
+float T_min = 18.0, T_max = 24.0;
+                    ^
+main.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+float T_min = 18.0, T_max = 24.0;
+^
+main.c(17): warning: no previous extern declaration for non-static variable 'H_min' [-Wmissing-variable-declarations]
+float H_min = 30.0, H_max = 60.0;
+      ^
+main.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+float H_min = 30.0, H_max = 60.0;
+^
+main.c(17): warning: no previous extern declaration for non-static variable 'H_max' [-Wmissing-variable-declarations]
+float H_min = 30.0, H_max = 60.0;
+                    ^
+main.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+float H_min = 30.0, H_max = 60.0;
+^
+main.c(19): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
+void LED_Init(void)
+     ^
+main.c(19): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void LED_Init(void)
+^
+static 
+main.c(29): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
+void Klaw_Init(void)
+     ^
+main.c(29): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void Klaw_Init(void)
+^
+static 
+main.c(78): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
+                                if(!(PTA->PDIR & S2_MASK)) { if(mode==0) T_min+=0.5; if(mode==1) T_max+=0.5; if(mode==2) H_min+=1; if(mode==3) H_max+=1; for(volatile int i=0;i<30000;i++); }
+                                                                              ~~^~~
+main.c(78): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
+                                if(!(PTA->PDIR & S2_MASK)) { if(mode==0) T_min+=0.5; if(mode==1) T_max+=0.5; if(mode==2) H_min+=1; if(mode==3) H_max+=1; for(volatile int i=0;i<30000;i++); }
+                                                                                                      ~~^~~
+main.c(79): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
+                                if(!(PTA->PDIR & S3_MASK)) { if(mode==0) T_min-=0.5; if(mode==1) T_max-=0.5; if(mode==2) H_min-=1; if(mode==3) H_max-=1; for(volatile int i=0;i<30000;i++); }
+                                                                              ~~^~~
+main.c(79): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
+                                if(!(PTA->PDIR & S3_MASK)) { if(mode==0) T_min-=0.5; if(mode==1) T_max-=0.5; if(mode==2) H_min-=1; if(mode==3) H_max-=1; for(volatile int i=0;i<30000;i++); }
+                                                                                                      ~~^~~
+main.c(90): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        uint16_t rawT = ((uint16_t)data[0] << 8) | data[1];
+                 ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+main.c(91): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+        uint16_t rawH = ((uint16_t)data[3] << 8) | data[4];
+                 ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+main.c(120): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+        int t_dec = (int)((temperature - t_int) * 10);
+                                       ~ ^~~~~
+main.c(122): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+        int h_dec = (int)((humidity - h_int) * 10);
+                                    ~ ^~~~~
+main.c(74): warning: unused variable 'edit' [-Wunused-variable]
+                                static uint8_t edit = 0;
+                                               ^
+main.c(141): warning: no newline at end of file [-Wnewline-eof]
+}
+ ^
+16 warnings generated.
+compiling main.c...
+linking...
+Program Size: Code=5476 RO-data=388 RW-data=20 ZI-data=360  
+".\Objects\weatherstation.axf" - 0 Error(s), 16 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -55,7 +127,7 @@ Package Vendor: Keil
    * Component: Keil::Device:Startup:1.0.0
       Source file:   Device\Source\ARM\startup_MKL05Z4.s
       Source file:   Device\Source\system_MKL05Z4.c
-Build Time Elapsed:  00:00:00
+Build Time Elapsed:  00:00:01
 </pre>
 </body>
 </html>
