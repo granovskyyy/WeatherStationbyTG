@@ -28,28 +28,28 @@ Project File Date:  01/11/2026
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'FRDM-KL05ZJ'
 main.c(16): warning: no previous extern declaration for non-static variable 'T_min' [-Wmissing-variable-declarations]
-float T_min = 18.0, T_max = 24.0;
-      ^
+int T_min = 18, T_max = 24;
+    ^
 main.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-float T_min = 18.0, T_max = 24.0;
+int T_min = 18, T_max = 24;
 ^
 main.c(16): warning: no previous extern declaration for non-static variable 'T_max' [-Wmissing-variable-declarations]
-float T_min = 18.0, T_max = 24.0;
-                    ^
+int T_min = 18, T_max = 24;
+                ^
 main.c(16): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-float T_min = 18.0, T_max = 24.0;
+int T_min = 18, T_max = 24;
 ^
 main.c(17): warning: no previous extern declaration for non-static variable 'H_min' [-Wmissing-variable-declarations]
-float H_min = 30.0, H_max = 60.0;
-      ^
+int H_min = 30, H_max = 60;
+    ^
 main.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-float H_min = 30.0, H_max = 60.0;
+int H_min = 30, H_max = 60;
 ^
 main.c(17): warning: no previous extern declaration for non-static variable 'H_max' [-Wmissing-variable-declarations]
-float H_min = 30.0, H_max = 60.0;
-                    ^
+int H_min = 30, H_max = 60;
+                ^
 main.c(17): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-float H_min = 30.0, H_max = 60.0;
+int H_min = 30, H_max = 60;
 ^
 main.c(18): warning: no previous extern declaration for non-static variable 'S2_press' [-Wmissing-variable-declarations]
 volatile uint8_t S2_press=0;    // "1" - klawisz zosta? wci?ni?ty "0" - klawisz "skonsumowany"
@@ -81,96 +81,69 @@ volatile uint8_t ui_mode = 0;     // 0 = ekran gl<F3>wny, 1 = konfiguracja
 main.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint8_t ui_mode = 0;     // 0 = ekran gl<F3>wny, 1 = konfiguracja
          ^
-main.c(23): warning: no previous extern declaration for non-static variable 'sekunda' [-Wmissing-variable-declarations]
-volatile uint8_t sekunda=0;               // licznik czasu w trybie konfiguracji
+main.c(23): warning: no previous extern declaration for non-static variable 'key_lock' [-Wmissing-variable-declarations]
+volatile uint8_t key_lock = 0;
                  ^
 main.c(23): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t sekunda=0;               // licznik czasu w trybie konfiguracji
+volatile uint8_t key_lock = 0;
          ^
-main.c(24): warning: no previous extern declaration for non-static variable 'sekunda_OK' [-Wmissing-variable-declarations]
-volatile uint8_t sekunda_OK=0;  
-                 ^
-main.c(24): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t sekunda_OK=0;  
-         ^
-main.c(25): warning: no previous extern declaration for non-static variable 'ui_idle_sec' [-Wmissing-variable-declarations]
-volatile uint8_t ui_idle_sec = 0;
-                 ^
-main.c(25): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t ui_idle_sec = 0;
-         ^
-main.c(27): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
-void SysTick_Handler(void)      // Podprogram obs?ugi przerwania od SysTick'a
+main.c(27): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
+void LED_Init(void)
      ^
 main.c(27): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void SysTick_Handler(void)      // Podprogram obs?ugi przerwania od SysTick'a
-^
-static 
-main.c(39): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
-void LED_Init(void)
-     ^
-main.c(39): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void LED_Init(void)
 ^
 static 
-main.c(49): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
+main.c(37): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
 void Klaw_Init(void)
+     ^
+main.c(37): note: declare 'static' if the function is not intended to be used outside of this translation unit
+void Klaw_Init(void)
+^
+static 
+main.c(49): warning: no previous prototype for function 'Klaw_S2_4_Int' [-Wmissing-prototypes]
+void Klaw_S2_4_Int(void)
      ^
 main.c(49): note: declare 'static' if the function is not intended to be used outside of this translation unit
-void Klaw_Init(void)
+void Klaw_S2_4_Int(void)
 ^
 static 
-main.c(62): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
+main.c(59): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
      ^
-main.c(62): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(59): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
 ^
 static 
-main.c(146): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
-                                                        if(mode==0) T_min+=0.5; 
-                                                                         ~~^~~
-main.c(147): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
-                                                        if(mode==1) T_max+=0.5; 
-                                                                         ~~^~~
-main.c(152): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
-                                                        if(mode==0) T_min-=0.5; 
-                                                                         ~~^~~
-main.c(153): warning: implicit conversion when assigning computation result loses floating-point precision: 'double' to 'float' [-Wimplicit-float-conversion]
-                                                        if(mode==1) T_max-=0.5; 
-                                                                         ~~^~~
-main.c(171): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(193): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
         uint16_t rawT = ((uint16_t)data[0] << 8) | data[1];
                  ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-main.c(172): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(194): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
         uint16_t rawH = ((uint16_t)data[3] << 8) | data[4];
                  ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+main.c(200): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+                                uint8_t alarmT = (temperature < T_min || temperature > T_max);
+                                                                                     ~ ^~~~~
+main.c(200): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+                                uint8_t alarmT = (temperature < T_min || temperature > T_max);
+                                                              ~ ^~~~~
 main.c(201): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+                                uint8_t alarmH = (humidity < H_min || humidity > H_max);
+                                                                               ~ ^~~~~
+main.c(201): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+                                uint8_t alarmH = (humidity < H_min || humidity > H_max);
+                                                           ~ ^~~~~
+main.c(223): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
         int t_dec = (int)((temperature - t_int) * 10);
                                        ~ ^~~~~
-main.c(203): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(225): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
         int h_dec = (int)((humidity - h_int) * 10);
                                     ~ ^~~~~
-main.c(221): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
-                                                                sprintf(buf,"Val: %2.1f", (mode==0)?T_min:T_max);
-                                                                ~~~~~~~                             ^~~~~
-main.c(221): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
-                                                                sprintf(buf,"Val: %2.1f", (mode==0)?T_min:T_max);
-                                                                ~~~~~~~                                   ^~~~~
-main.c(223): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
-                                                                sprintf(buf,"Val: %2.0f", (mode==2)?H_min:H_max);
-                                                                ~~~~~~~                             ^~~~~
-main.c(223): warning: implicit conversion increases floating-point precision: 'float' to 'double' [-Wdouble-promotion]
-                                                                sprintf(buf,"Val: %2.0f", (mode==2)?H_min:H_max);
-                                                                ~~~~~~~                                   ^~~~~
-main.c(239): warning: no newline at end of file [-Wnewline-eof]
-}
- ^
-29 warnings generated.
+22 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=10472 RO-data=540 RW-data=20 ZI-data=368  
-".\Objects\weatherstation.axf" - 0 Error(s), 29 Warning(s).
+Program Size: Code=5624 RO-data=288 RW-data=20 ZI-data=368  
+".\Objects\weatherstation.axf" - 0 Error(s), 22 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -196,8 +169,8 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\system_MKL05Z4.c
       Source file:   Device\Source\ARM\startup_MKL05Z4.s
+      Source file:   Device\Source\system_MKL05Z4.c
 Build Time Elapsed:  00:00:01
 </pre>
 </body>
