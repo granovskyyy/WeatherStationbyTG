@@ -81,69 +81,84 @@ volatile uint8_t ui_mode = 0;     // 0 = ekran gl<F3>wny, 1 = konfiguracja
 main.c(22): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint8_t ui_mode = 0;     // 0 = ekran gl<F3>wny, 1 = konfiguracja
          ^
-main.c(23): warning: no previous extern declaration for non-static variable 'key_lock' [-Wmissing-variable-declarations]
-volatile uint8_t key_lock = 0;
-                 ^
+main.c(23): warning: no previous extern declaration for non-static variable 'debounce' [-Wmissing-variable-declarations]
+volatile uint32_t debounce=0;
+                  ^
 main.c(23): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t key_lock = 0;
+volatile uint32_t debounce=0;
          ^
-main.c(27): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
+main.c(24): warning: no previous extern declaration for non-static variable 'screenmode' [-Wmissing-variable-declarations]
+volatile uint8_t screenmode=0;
+                 ^
+main.c(24): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t screenmode=0;
+         ^
+main.c(25): warning: no previous extern declaration for non-static variable 'S2_nr' [-Wmissing-variable-declarations]
+volatile uint8_t S2_nr = 0;
+                 ^
+main.c(25): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t S2_nr = 0;
+         ^
+main.c(28): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
 void LED_Init(void)
      ^
-main.c(27): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(28): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void LED_Init(void)
 ^
 static 
-main.c(37): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
+main.c(38): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
 void Klaw_Init(void)
      ^
-main.c(37): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(38): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void Klaw_Init(void)
 ^
 static 
-main.c(49): warning: no previous prototype for function 'Klaw_S2_4_Int' [-Wmissing-prototypes]
+main.c(50): warning: no previous prototype for function 'Klaw_S2_4_Int' [-Wmissing-prototypes]
 void Klaw_S2_4_Int(void)
      ^
-main.c(49): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(50): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void Klaw_S2_4_Int(void)
 ^
 static 
-main.c(59): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
+main.c(60): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
      ^
-main.c(59): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(60): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
 ^
 static 
-main.c(193): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(267): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
         uint16_t rawT = ((uint16_t)data[0] << 8) | data[1];
                  ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-main.c(194): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(268): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
         uint16_t rawH = ((uint16_t)data[3] << 8) | data[4];
                  ~~~~   ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
-main.c(200): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(274): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
                                 uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                                                                      ~ ^~~~~
-main.c(200): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(274): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
                                 uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                                               ~ ^~~~~
-main.c(201): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(275): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
                                 uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                                                                ~ ^~~~~
-main.c(201): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(275): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
                                 uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                                            ~ ^~~~~
-main.c(223): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(297): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
         int t_dec = (int)((temperature - t_int) * 10);
                                        ~ ^~~~~
-main.c(225): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(299): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
         int h_dec = (int)((humidity - h_int) * 10);
                                     ~ ^~~~~
-22 warnings generated.
+main.c(319): warning: no newline at end of file [-Wnewline-eof]
+        }
+         ^
+25 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=5624 RO-data=288 RW-data=20 ZI-data=368  
-".\Objects\weatherstation.axf" - 0 Error(s), 22 Warning(s).
+Program Size: Code=5660 RO-data=300 RW-data=20 ZI-data=368  
+".\Objects\weatherstation.axf" - 0 Error(s), 25 Warning(s).
 
 <h2>Software Packages used:</h2>
 
@@ -169,8 +184,8 @@ Package Vendor: Keil
    * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:1.0.0
-      Source file:   Device\Source\ARM\startup_MKL05Z4.s
       Source file:   Device\Source\system_MKL05Z4.c
+      Source file:   Device\Source\ARM\startup_MKL05Z4.s
 Build Time Elapsed:  00:00:01
 </pre>
 </body>

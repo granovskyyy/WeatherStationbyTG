@@ -12,7 +12,7 @@
 #define LED_R		(1<<8)		// Maska dla diody czerwonej (R)
 #define LED_G		(1<<9)		// Maska dla diody czerwonej (G)
 #define LED_B		(1<<10)		// Maska dla diody czerwonej (B)
-
+#define S2_LIMIT 4
 int T_min = 18, T_max = 24;
 int H_min = 30, H_max = 60;
 volatile uint8_t S2_press=0;	// "1" - klawisz zosta? wci?ni?ty "0" - klawisz "skonsumowany"
@@ -20,8 +20,9 @@ volatile uint8_t S3_press=0;
 volatile uint8_t S4_press=0;
 volatile uint8_t mode = 0;   // 0=Tmin,1=Tmax,2=Hmin,3=Hmax
 volatile uint8_t ui_mode = 0;     // 0 = ekran glówny, 1 = konfiguracja
-volatile uint8_t key_lock = 0;
-
+volatile uint32_t debounce=0;
+volatile uint8_t screenmode=0;
+volatile uint8_t S2_nr = 0;
 
 
 void LED_Init(void)
@@ -58,28 +59,23 @@ void Klaw_S2_4_Int(void)
 
 void PORTA_IRQHandler(void)	// Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
 {
-		if(key_lock) 
-		{
-				PORTA->ISFR = 0xFFFFFFFF;
-				return;
-		}
-		key_lock = 1;
-
 	uint32_t buf;
 	buf=PORTA->ISFR & (S2_MASK | S3_MASK | S4_MASK);
 
 	switch(buf)
 	{
-		case S2_MASK:	
-			DELAY(100)		// Minimalizacja drga? zestyk?w
-									if(!(PTA->PDIR&S2_MASK))		
-									{
-										if(!S2_press)
-										{
-											S2_press=1;
-										}
-									}									
-									break;
+			case S2_MASK:    DELAY(100)
+											if(!(PTA->PDIR & S2_MASK))
+											{
+													if(!S2_press)
+													{
+															S2_nr += 1;
+															if(S2_nr > S2_LIMIT)
+																	S2_nr = 0;
+															S2_press = 1;
+													}
+											}
+											break;
 		case S3_MASK:	
 			DELAY(100)		// Minimalizacja drga? zestyk?w
 									if(!(PTA->PDIR&S3_MASK))		
@@ -101,18 +97,18 @@ void PORTA_IRQHandler(void)	// Podprogram obs?ugi przerwania od klawiszy S2, S3 
 	}	
 	PORTA->ISFR |=  S2_MASK | S3_MASK | S4_MASK;	// Kasowanie wszystkich bit?w ISF
 	NVIC_ClearPendingIRQ(PORTA_IRQn);
-	ui_mode=1;
-	mode = 0; 
-	for(volatile int i=0;i<20000;i++);  // ~5–10 ms
-	key_lock = 0;
 
 
 }
 
 int main(void)
 {
+
+
     float temperature, humidity;
     uint8_t data[6];
+
+
     char buf[17];
 		LED_Init();
 		Klaw_Init();
@@ -130,55 +126,133 @@ int main(void)
 
     while(1)
     {
-				// ----- obsluga timeoutu trybu edycji -----
+			
 
-					if(ui_mode)
+			if(!(PTA->PDIR & S1_MASK))   // S1 wcisniety
+			{
+					ui_mode = 0;             // powrót do podgladu
+					screenmode = 1;         // odswiez LCD
+			}
+			if(debounce)
+			{
+				debounce--;
+			}
+			if(!debounce && S2_press)
+			{
+						if(S2_press)
+						{
+								ui_mode=1;
+								mode = (mode + 1) % 4;
+								screenmode=1;
+								debounce=100000;
+								S2_press = 0;
+								continue;
+						}
+			}
+						
+
+				if(!debounce && ui_mode)
 				{
 						// ===== TRYB EDYCJI =====
 
-						if(S2_press)
-						{
-								mode = (mode + 1) % 4;
-								S2_press = 0;
-						}
-
+	
 						if(S3_press)
-						{
-								if(mode==0) T_min++;
-								if(mode==1) T_max++;
-								if(mode==2) H_min++;
-								if(mode==3) H_max++;
+						{	
+								ui_mode=1;
+								switch(mode)
+								{
+									case 0:
+										T_min++;
+										break;
+									case 1:
+										T_max++;
+										break;
+									case 2:
+										H_min++;
+										break;
+									case 3:
+										H_max++;
+										break;
+									default:
+										break;
+								}
+								screenmode=1;
+								debounce=100000;
 								S3_press = 0;
 						}
+					
 
 						if(S4_press)
-						{
-								if(mode==0) T_min--;
-								if(mode==1) T_max--;
-								if(mode==2) H_min--;
-								if(mode==3) H_max--;
+						{	
+								ui_mode=1;
+								switch(mode)
+								{
+									case 0:
+										T_min--;
+										break;
+									case 1:
+										T_max--;
+										break;
+									case 2:
+										H_min--;
+										break;
+									case 3:
+										H_max--;
+										break;
+									default:
+										break;
+								}
+								screenmode=1;
+								debounce=100000;
 								S4_press = 0;
+								
+
+
+						}
+					}
+						
+						if(ui_mode && screenmode)
+						{
+								screenmode = 0;
+
+								LCD1602_ClearAll();
+
+								switch(mode)
+								{
+										case 0:
+												LCD1602_SetCursor(0,0);
+												LCD1602_Print("Edit Tmin");
+												LCD1602_SetCursor(0,1);
+												sprintf(buf,"Val: %2d ",T_min);
+												LCD1602_Print(buf);
+												break;
+										case 1:
+												LCD1602_SetCursor(0,0);
+												LCD1602_Print("Edit Tmax");
+												LCD1602_SetCursor(0,1);
+												sprintf(buf,"Val: %2d ",T_max);
+												LCD1602_Print(buf);
+												break;
+										case 2:
+												LCD1602_SetCursor(0,0);
+												LCD1602_Print("Edit Hmin");
+												LCD1602_SetCursor(0,1);
+												sprintf(buf,"Val: %2d ",H_min);
+												LCD1602_Print(buf);
+												break;
+										case 3:
+												LCD1602_SetCursor(0,0);
+												LCD1602_Print("Edit Hmax");
+												LCD1602_SetCursor(0,1);
+												sprintf(buf,"Val: %2d ",H_max);
+												LCD1602_Print(buf);
+												break;
+								}
 						}
 
-						LCD1602_ClearAll();
-						LCD1602_SetCursor(0,0);
 
-						if(mode==0) LCD1602_Print("Edit Tmin");
-						if(mode==1) LCD1602_Print("Edit Tmax");
-						if(mode==2) LCD1602_Print("Edit Hmin");
-						if(mode==3) LCD1602_Print("Edit Hmax");
-
-						LCD1602_SetCursor(0,1);
-						if(mode < 2) sprintf(buf,"Val: %2d",(mode==0)?T_min:T_max);
-						else         sprintf(buf,"Val: %2d",(mode==2)?H_min:H_max);
-						LCD1602_Print(buf);
-
-						for(volatile int d=0; d<150000; d++);   // zeby ekran nie migotal
-						continue;   // ??? KLUCZ: nie wykonuj reszty petli
-				}
-						
+					
 			
-				
 
 
         /* --- Start pomiaru SHT35 --- */
@@ -224,20 +298,22 @@ int main(void)
         int h_int = (int)humidity;
         int h_dec = (int)((humidity - h_int) * 10);
 
-
-
 	
-					LCD1602_SetCursor(0,0);
-					sprintf(buf,"T: %2d.%1d C", t_int, t_dec);
-					LCD1602_Print(buf);
+		
+					
 
-					LCD1602_SetCursor(0,1);
-					sprintf(buf,"H: %2d.%1d %%", h_int, h_dec);
-					LCD1602_Print(buf);
-			
-	
+
+								LCD1602_SetCursor(0,0);
+								sprintf(buf,"T: %2d.%1d C", t_int, t_dec);
+								LCD1602_Print(buf);
+
+								LCD1602_SetCursor(0,1);
+								sprintf(buf,"H: %2d.%1d %%", h_int, h_dec);
+								LCD1602_Print(buf);
+						
 				
 
+			}
 
-    }
-}
+
+	}

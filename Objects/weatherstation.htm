@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\weatherstation.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\weatherstation.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Tue Jan 13 15:41:08 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Thu Jan 15 14:19:25 2026
 <BR><P>
 <H3>Maximum Stack Usage =        208 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -745,8 +745,8 @@ Global Symbols
 <LI><a href="#[6d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LCD1602_Backlight
 </UL>
 
-<P><STRONG><a name="[24]"></a>PORTA_IRQHandler</STRONG> (Thumb, 160 bytes, Stack size 24 bytes, main.o(.text.PORTA_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = PORTA_IRQHandler
+<P><STRONG><a name="[24]"></a>PORTA_IRQHandler</STRONG> (Thumb, 136 bytes, Stack size 16 bytes, main.o(.text.PORTA_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = PORTA_IRQHandler
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__NVIC_ClearPendingIRQ
 </UL>
@@ -853,7 +853,7 @@ Global Symbols
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_ReadRegBlock
 </UL>
 
-<P><STRONG><a name="[38]"></a>main</STRONG> (Thumb, 892 bytes, Stack size 80 bytes, main.o(.text.main))
+<P><STRONG><a name="[38]"></a>main</STRONG> (Thumb, 948 bytes, Stack size 80 bytes, main.o(.text.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 208 + Unknown Stack Size
 <LI>Call Chain = main &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
