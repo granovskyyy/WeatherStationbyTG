@@ -120,54 +120,75 @@ volatile uint8_t block_ui = 0;
 main.c(67): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint8_t block_ui = 0;
          ^
-main.c(85): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
+main.c(74): warning: no previous extern declaration for non-static variable 'blink_timer' [-Wmissing-variable-declarations]
+uint32_t blink_timer = 0;
+         ^
+main.c(74): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint32_t blink_timer = 0;
+^
+main.c(75): warning: no previous extern declaration for non-static variable 'blink_state' [-Wmissing-variable-declarations]
+uint8_t  blink_state = 0;
+         ^
+main.c(75): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t  blink_state = 0;
+^
+main.c(76): warning: no previous extern declaration for non-static variable 'blink_count' [-Wmissing-variable-declarations]
+uint8_t  blink_count = 0;
+         ^
+main.c(76): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t  blink_count = 0;
+^
+main.c(77): warning: no previous extern declaration for non-static variable 'blink_active' [-Wmissing-variable-declarations]
+uint8_t  blink_active = 0;
+         ^
+main.c(77): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+uint8_t  blink_active = 0;
+^
+main.c(90): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
 void SysTick_Handler(void)
      ^
-main.c(85): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(90): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void SysTick_Handler(void)
 ^
 static 
-main.c(93): warning: declaration shadows a variable in the global scope [-Wshadow]
+main.c(98): warning: declaration shadows a variable in the global scope [-Wshadow]
         uint32_t buf;
                  ^
 main.c(72): note: previous declaration is here
 char buf[17];
      ^
-main.c(91): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
+main.c(96): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
      ^
-main.c(91): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(96): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
 ^
 static 
-main.c(183): warning: implicit conversion loses integer precision: 'unsigned int' to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
-    uint8_t s1 = (PTA->PDIR & S1_MASK);
-            ~~    ~~~~~~~~~~^~~~~~~~~
-main.c(199): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(195): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(208): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(204): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(219): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(215): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(285): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(281): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
     uint16_t rawT = (data[0]<<8)|data[1];
              ~~~~   ~~~~~~~~~~~~^~~~~~~~
-main.c(286): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(282): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
     uint16_t rawH = (data[3]<<8)|data[4];
              ~~~~   ~~~~~~~~~~~~^~~~~~~~
-main.c(295): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(291): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                                          ~ ^~~~~
-main.c(295): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(291): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                   ~ ^~~~~
-main.c(296): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(292): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                                    ~ ^~~~~
-main.c(296): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(292): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                ~ ^~~~~
 main.c(70): warning: no previous extern declaration for non-static variable 'temperature' [-Wmissing-variable-declarations]
@@ -194,11 +215,11 @@ char buf[17];
 main.c(72): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 char buf[17];
 ^
-32 warnings generated.
+35 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=6856 RO-data=308 RW-data=28 ZI-data=408  
-".\Objects\weatherstation.axf" - 0 Error(s), 32 Warning(s).
+Program Size: Code=7016 RO-data=308 RW-data=28 ZI-data=416  
+".\Objects\weatherstation.axf" - 0 Error(s), 35 Warning(s).
 
 <h2>Software Packages used:</h2>
 

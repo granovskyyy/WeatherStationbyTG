@@ -71,6 +71,11 @@ float temperature, humidity;
 uint8_t data[6];
 char buf[17];
 
+uint32_t blink_timer = 0;
+uint8_t  blink_state = 0;
+uint8_t  blink_count = 0;
+uint8_t  blink_active = 0;
+
 /* ===== PROTOTYPY ===== */
 void LED_Init(void);
 void Klaw_Init(void);
@@ -168,31 +173,22 @@ int main(void)
 /* ===== UI TASK ===== */
 void UI_Task(void)
 {
-		if(block_ui)
-			{
-					block_ui = 0;
-					LCD_Task();   // pozwól tylko odswiezyc ekran
-					return;
-			}	
 
     static uint32_t debounce = 0;
-    static uint8_t last_S1 = 1;
 
     if(debounce) debounce--;
 
-    uint8_t s1 = (PTA->PDIR & S1_MASK);
 
-    if(!s1 && last_S1)
+    if(S2_press && S3_press)
 		{
 				ui_mode = 0;
 				S2_press = 0;
 				S3_press = 0;
 				S4_press = 0;
-				block_ui=1;
 		}
 
 
-    last_S1 = s1;
+    //last_S1 = s1;
 
     if(!debounce && S2_press)
     {
@@ -295,8 +291,48 @@ void LED_Task(void)
     uint8_t alarmT = (temperature < T_min || temperature > T_max);
     uint8_t alarmH = (humidity < H_min || humidity > H_max);
 
+    // Zgas wszystkie
     PTB->PSOR = LED_R_MASK | LED_G_MASK | LED_B_MASK;
 
+    // === oba alarmy ===
+    if(alarmT && alarmH)
+    {
+        if(!blink_active)   // start sekwencji
+        {
+            blink_active = 1;
+            blink_count  = 0;
+            blink_state  = 0;
+            blink_timer  = sys_ms;
+        }
+
+        if(blink_active && (sys_ms - blink_timer >= 200))
+        {
+            blink_timer = sys_ms;
+            blink_state ^= 1;
+
+            if(!blink_state)
+                blink_count++;   // zliczamy pelne migniecie
+        }
+
+        if(blink_state)
+            PTB->PCOR = LED_R_MASK;
+        else
+            PTB->PCOR = LED_B_MASK;
+
+        if(blink_count >= 5)
+        {
+            blink_active = 0;    // koniec migania
+            PTB->PSOR = LED_R_MASK | LED_G_MASK | LED_B_MASK;
+        }
+
+        return;
+    }
+
+    // reset gdy alarm znika
+    blink_active = 0;
+    blink_count  = 0;
+
+    // === pojedyncze alarmy ===
     if(alarmT) PTB->PCOR = LED_R_MASK;
     if(alarmH) PTB->PCOR = LED_B_MASK;
 }
