@@ -27,198 +27,198 @@ Project File Date:  01/11/2026
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'FRDM-KL05ZJ'
-main.c(22): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
+main.c(26): warning: no previous prototype for function 'Klaw_Init' [-Wmissing-prototypes]
 void Klaw_Init(void)
      ^
-main.c(22): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(26): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void Klaw_Init(void)
 ^
 static 
-main.c(34): warning: no previous prototype for function 'Klaw_S2_4_Int' [-Wmissing-prototypes]
+main.c(38): warning: no previous prototype for function 'Klaw_S2_4_Int' [-Wmissing-prototypes]
 void Klaw_S2_4_Int(void)
      ^
-main.c(34): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(38): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void Klaw_S2_4_Int(void)
 ^
 static 
-main.c(44): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
+main.c(48): warning: no previous prototype for function 'LED_Init' [-Wmissing-prototypes]
 void LED_Init(void)
      ^
-main.c(44): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(48): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void LED_Init(void)
 ^
 static 
-main.c(56): warning: no previous extern declaration for non-static variable 'sys_ms' [-Wmissing-variable-declarations]
+main.c(60): warning: no previous extern declaration for non-static variable 'sys_ms' [-Wmissing-variable-declarations]
 volatile uint32_t sys_ms = 0;
                   ^
-main.c(56): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(60): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint32_t sys_ms = 0;
          ^
-main.c(58): warning: no previous extern declaration for non-static variable 'T_min' [-Wmissing-variable-declarations]
+main.c(62): warning: no previous extern declaration for non-static variable 'T_min' [-Wmissing-variable-declarations]
 int T_min = 18, T_max = 24;
     ^
-main.c(58): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-int T_min = 18, T_max = 24;
-^
-main.c(58): warning: no previous extern declaration for non-static variable 'T_max' [-Wmissing-variable-declarations]
-int T_min = 18, T_max = 24;
-                ^
-main.c(58): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-int T_min = 18, T_max = 24;
-^
-main.c(59): warning: no previous extern declaration for non-static variable 'H_min' [-Wmissing-variable-declarations]
-int H_min = 30, H_max = 60;
-    ^
-main.c(59): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-int H_min = 30, H_max = 60;
-^
-main.c(59): warning: no previous extern declaration for non-static variable 'H_max' [-Wmissing-variable-declarations]
-int H_min = 30, H_max = 60;
-                ^
-main.c(59): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-int H_min = 30, H_max = 60;
-^
-main.c(61): warning: no previous extern declaration for non-static variable 'S2_press' [-Wmissing-variable-declarations]
-volatile uint8_t S2_press = 0;
-                 ^
-main.c(61): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t S2_press = 0;
-         ^
-main.c(62): warning: no previous extern declaration for non-static variable 'S3_press' [-Wmissing-variable-declarations]
-volatile uint8_t S3_press = 0;
-                 ^
 main.c(62): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int T_min = 18, T_max = 24;
+^
+main.c(62): warning: no previous extern declaration for non-static variable 'T_max' [-Wmissing-variable-declarations]
+int T_min = 18, T_max = 24;
+                ^
+main.c(62): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int T_min = 18, T_max = 24;
+^
+main.c(63): warning: no previous extern declaration for non-static variable 'H_min' [-Wmissing-variable-declarations]
+int H_min = 30, H_max = 60;
+    ^
+main.c(63): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int H_min = 30, H_max = 60;
+^
+main.c(63): warning: no previous extern declaration for non-static variable 'H_max' [-Wmissing-variable-declarations]
+int H_min = 30, H_max = 60;
+                ^
+main.c(63): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+int H_min = 30, H_max = 60;
+^
+main.c(65): warning: no previous extern declaration for non-static variable 'S2_press' [-Wmissing-variable-declarations]
+volatile uint8_t S2_press = 0;
+                 ^
+main.c(65): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t S2_press = 0;
+         ^
+main.c(66): warning: no previous extern declaration for non-static variable 'S3_press' [-Wmissing-variable-declarations]
+volatile uint8_t S3_press = 0;
+                 ^
+main.c(66): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint8_t S3_press = 0;
          ^
-main.c(63): warning: no previous extern declaration for non-static variable 'S4_press' [-Wmissing-variable-declarations]
+main.c(67): warning: no previous extern declaration for non-static variable 'S4_press' [-Wmissing-variable-declarations]
 volatile uint8_t S4_press = 0;
-                 ^
-main.c(63): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t S4_press = 0;
-         ^
-main.c(64): warning: no previous extern declaration for non-static variable 'last_user_action' [-Wmissing-variable-declarations]
-volatile uint8_t last_user_action=0;
-                 ^
-main.c(64): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-volatile uint8_t last_user_action=0;
-         ^
-main.c(65): warning: no previous extern declaration for non-static variable 'ui_mode' [-Wmissing-variable-declarations]
-uint8_t ui_mode = 0;
-        ^
-main.c(65): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t ui_mode = 0;
-^
-main.c(66): warning: no previous extern declaration for non-static variable 'mode' [-Wmissing-variable-declarations]
-uint8_t mode = 0;
-        ^
-main.c(66): note: declare 'static' if the variable is not intended to be used outside of this translation unit
-uint8_t mode = 0;
-^
-main.c(67): warning: no previous extern declaration for non-static variable 'block_ui' [-Wmissing-variable-declarations]
-volatile uint8_t block_ui = 0;
                  ^
 main.c(67): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t S4_press = 0;
+         ^
+main.c(68): warning: no previous extern declaration for non-static variable 'last_user_action' [-Wmissing-variable-declarations]
+volatile uint8_t last_user_action=0;
+                 ^
+main.c(68): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t last_user_action=0;
+         ^
+main.c(69): warning: no previous extern declaration for non-static variable 'ui_mode' [-Wmissing-variable-declarations]
+volatile uint8_t ui_mode = 0;
+                 ^
+main.c(69): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t ui_mode = 0;
+         ^
+main.c(70): warning: no previous extern declaration for non-static variable 'mode' [-Wmissing-variable-declarations]
+volatile uint8_t mode = 0;
+                 ^
+main.c(70): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+volatile uint8_t mode = 0;
+         ^
+main.c(71): warning: no previous extern declaration for non-static variable 'block_ui' [-Wmissing-variable-declarations]
+volatile uint8_t block_ui = 0;
+                 ^
+main.c(71): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 volatile uint8_t block_ui = 0;
          ^
-main.c(74): warning: no previous extern declaration for non-static variable 'blink_timer' [-Wmissing-variable-declarations]
+main.c(78): warning: no previous extern declaration for non-static variable 'blink_timer' [-Wmissing-variable-declarations]
 uint32_t blink_timer = 0;
          ^
-main.c(74): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(78): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint32_t blink_timer = 0;
 ^
-main.c(75): warning: no previous extern declaration for non-static variable 'blink_state' [-Wmissing-variable-declarations]
+main.c(79): warning: no previous extern declaration for non-static variable 'blink_state' [-Wmissing-variable-declarations]
 uint8_t  blink_state = 0;
          ^
-main.c(75): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(79): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint8_t  blink_state = 0;
 ^
-main.c(76): warning: no previous extern declaration for non-static variable 'blink_count' [-Wmissing-variable-declarations]
+main.c(80): warning: no previous extern declaration for non-static variable 'blink_count' [-Wmissing-variable-declarations]
 uint8_t  blink_count = 0;
          ^
-main.c(76): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(80): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint8_t  blink_count = 0;
 ^
-main.c(77): warning: no previous extern declaration for non-static variable 'blink_active' [-Wmissing-variable-declarations]
+main.c(81): warning: no previous extern declaration for non-static variable 'blink_active' [-Wmissing-variable-declarations]
 uint8_t  blink_active = 0;
          ^
-main.c(77): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(81): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint8_t  blink_active = 0;
 ^
-main.c(90): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
+main.c(94): warning: no previous prototype for function 'SysTick_Handler' [-Wmissing-prototypes]
 void SysTick_Handler(void)
      ^
-main.c(90): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(94): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void SysTick_Handler(void)
 ^
 static 
-main.c(98): warning: declaration shadows a variable in the global scope [-Wshadow]
+main.c(102): warning: declaration shadows a variable in the global scope [-Wshadow]
         uint32_t buf;
                  ^
-main.c(72): note: previous declaration is here
+main.c(76): note: previous declaration is here
 char buf[17];
      ^
-main.c(96): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
+main.c(100): warning: no previous prototype for function 'PORTA_IRQHandler' [-Wmissing-prototypes]
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
      ^
-main.c(96): note: declare 'static' if the function is not intended to be used outside of this translation unit
+main.c(100): note: declare 'static' if the function is not intended to be used outside of this translation unit
 void PORTA_IRQHandler(void)     // Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
 ^
 static 
-main.c(195): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(200): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(204): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(209): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(215): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
+main.c(244): warning: implicit conversion loses integer precision: 'volatile uint32_t' (aka 'volatile unsigned int') to 'uint8_t' (aka 'unsigned char') [-Wimplicit-int-conversion]
                                 last_user_action = sys_ms;
                                                  ~ ^~~~~~
-main.c(281): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(335): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
     uint16_t rawT = (data[0]<<8)|data[1];
              ~~~~   ~~~~~~~~~~~~^~~~~~~~
-main.c(282): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
+main.c(336): warning: implicit conversion loses integer precision: 'int' to 'uint16_t' (aka 'unsigned short') [-Wimplicit-int-conversion]
     uint16_t rawH = (data[3]<<8)|data[4];
              ~~~~   ~~~~~~~~~~~~^~~~~~~~
-main.c(291): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(345): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                                          ~ ^~~~~
-main.c(291): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(345): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmT = (temperature < T_min || temperature > T_max);
                                   ~ ^~~~~
-main.c(292): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(346): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                                    ~ ^~~~~
-main.c(292): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
+main.c(346): warning: implicit conversion from 'int' to 'float' may lose precision [-Wimplicit-int-float-conversion]
     uint8_t alarmH = (humidity < H_min || humidity > H_max);
                                ~ ^~~~~
-main.c(70): warning: no previous extern declaration for non-static variable 'temperature' [-Wmissing-variable-declarations]
+main.c(74): warning: no previous extern declaration for non-static variable 'temperature' [-Wmissing-variable-declarations]
 float temperature, humidity;
       ^
-main.c(70): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(74): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 float temperature, humidity;
 ^
-main.c(70): warning: no previous extern declaration for non-static variable 'humidity' [-Wmissing-variable-declarations]
+main.c(74): warning: no previous extern declaration for non-static variable 'humidity' [-Wmissing-variable-declarations]
 float temperature, humidity;
                    ^
-main.c(70): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(74): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 float temperature, humidity;
 ^
-main.c(71): warning: no previous extern declaration for non-static variable 'data' [-Wmissing-variable-declarations]
+main.c(75): warning: no previous extern declaration for non-static variable 'data' [-Wmissing-variable-declarations]
 uint8_t data[6];
         ^
-main.c(71): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(75): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 uint8_t data[6];
 ^
-main.c(72): warning: no previous extern declaration for non-static variable 'buf' [-Wmissing-variable-declarations]
+main.c(76): warning: no previous extern declaration for non-static variable 'buf' [-Wmissing-variable-declarations]
 char buf[17];
      ^
-main.c(72): note: declare 'static' if the variable is not intended to be used outside of this translation unit
+main.c(76): note: declare 'static' if the variable is not intended to be used outside of this translation unit
 char buf[17];
 ^
 35 warnings generated.
 compiling main.c...
 linking...
-Program Size: Code=7016 RO-data=308 RW-data=28 ZI-data=416  
+Program Size: Code=7168 RO-data=308 RW-data=28 ZI-data=416  
 ".\Objects\weatherstation.axf" - 0 Error(s), 35 Warning(s).
 
 <h2>Software Packages used:</h2>

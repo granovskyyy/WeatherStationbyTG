@@ -17,6 +17,10 @@
 #define LED_G_MASK		(1<<9)		// Maska dla diody zielonej (G)
 #define LED_B_MASK		(1<<10)		// Maska dla diody niebieskiej (B)
 
+#define TMAXLIMIT 40
+#define TMINLIMIT 0 
+#define HMAXLIMIT 100
+#define HMINLIMIT 0
 
 //FUNKCJE SPRZETOWE
 void Klaw_Init(void)
@@ -62,8 +66,8 @@ volatile uint8_t S2_press = 0;
 volatile uint8_t S3_press = 0;
 volatile uint8_t S4_press = 0;
 volatile uint8_t last_user_action=0;
-uint8_t ui_mode = 0;
-uint8_t mode = 0;
+volatile uint8_t ui_mode = 0;
+volatile uint8_t mode = 0;
 volatile uint8_t block_ui = 0;
 
 
@@ -182,6 +186,7 @@ void UI_Task(void)
     if(S2_press && S3_press)
 		{
 				ui_mode = 0;
+				debounce = 100;
 				S2_press = 0;
 				S3_press = 0;
 				S4_press = 0;
@@ -202,10 +207,34 @@ void UI_Task(void)
     if(!debounce && ui_mode && S3_press)
     {
 				last_user_action = sys_ms;
-        if(mode==0) T_min++;
-        if(mode==1) T_max++;
-        if(mode==2) H_min++;
-        if(mode==3) H_max++;
+        if(mode==0)
+				{
+					if(T_min<TMAXLIMIT && T_min+1<T_max)
+					{
+						T_min++;
+					}
+				}					
+        else if(mode==1)
+				{
+					if(T_max<TMAXLIMIT)
+					{
+						T_max++;
+					}
+				}
+        else if(mode==2) 
+				{
+					if(H_min<HMAXLIMIT && H_min+1<H_max)
+					{
+						H_min++;
+					}
+				}			
+        else if(mode==3)
+				{
+					if(H_max<HMAXLIMIT)
+					{
+						H_max++;
+					}
+				}					
         debounce = 100;
         S3_press = 0;
     }
@@ -213,10 +242,35 @@ void UI_Task(void)
     if(!debounce && ui_mode && S4_press)
     {
 				last_user_action = sys_ms;
-        if(mode==0) T_min--;
-        if(mode==1) T_max--;
-        if(mode==2) H_min--;
-        if(mode==3) H_max--;
+        if(mode==0)
+				{
+					if(T_min > TMINLIMIT)
+					{
+						 T_min--;
+					}
+           
+				}				
+        else if(mode==1)
+				{
+					if(T_max>TMINLIMIT && T_max-1 >T_min)
+					{
+						T_max--;
+					}
+				}
+        else if(mode==2)
+				{
+					if(H_min>HMINLIMIT)
+					{
+							H_min--;
+					}
+				}					
+        else if(mode==3)
+				{
+					if(H_max>HMINLIMIT && H_max-1>H_min)
+					{
+								H_max--;
+					}			
+				}
         debounce = 100;
         S4_press = 0;
     }
