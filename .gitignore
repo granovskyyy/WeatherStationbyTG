@@ -1,0 +1,26 @@
+# ==== Keil / uVision build artifacts ====
+Objects/
+Listings/
+*.axf
+*.hex
+*.elf
+*.map
+*.lst
+*.htm
+*.bak
+*.dep
+
+# ==== Keil user / IDE files ====
+*.uvgui.*
+*.uvoptx
+
+# ==== Temporary / autosave ====
+*.~*
+*.tmp
+
+# ==== Debug output ====
+*.log
+
+# ==== OS junk ====
+.DS_Store
+Thumbs.db
