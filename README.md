@@ -50,6 +50,8 @@ This project implements a compact weather station using an ARM Cortex-M0+ MCU (N
 | LED B      | PTB10 |
 
 ---
+## Block diagram 
+<img width="1196" height="481" alt="image" src="https://github.com/user-attachments/assets/1b45af73-57f6-4515-a4ae-22ceb8d37568" />
 
 ##  Software Architecture
 
