@@ -95,8 +95,8 @@ Value limits are enforced in firmware:
   └── README.md
 
   ## Debugging (Keil uVision/JLink) 
-  1. Open Options for Target
-  2. In new windows, choose Target -> ARM Compiler -> Use default compiler version 6
+  1. Project-> Options for Target
+  2. In new window, choose Target -> ARM Compiler -> Use default compiler version 6
   3. In C/C++ window -> Language C -> c99
   4. In Debug window -> Use-> J-Link/J-TRACE Cortex
   5. Then Settings -> Accept -> Debug window -> Max Clock -> 2MHz 
