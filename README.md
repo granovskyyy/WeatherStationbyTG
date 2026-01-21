@@ -29,8 +29,7 @@ This project implements a compact weather station using an ARM Cortex-M0+ MCU (N
 
 **Toolchain / Software:**
 
-- ARM GCC toolchain  
-- Make/CMake build system (as in this repository)  
+- ARM GCC toolchain (tested on Keil uVision)
 - Optional debugger (CMSIS-DAP / J-Link / etc.)
 
 ---
@@ -88,10 +87,20 @@ Value limits are enforced in firmware:
 ---
 
 ##  Repository Structure
-WeatherStationbyTG/
-├── main.c # Main application and task scheduler
-├── lcd1602.c/.h # LCD driver for 1602 display
-├── i2c.c/.h # I2C helper functions
-├── Listings/Objects/RTE # Build configurations
-└── README.md
+  WeatherStationbyTG/
+  ├── main.c # Main application and task scheduler
+  ├── lcd1602.c/.h # LCD driver for 1602 display
+  ├── i2c.c/.h # I2C helper functions
+  ├── Listings/Objects/RTE # Build configurations
+  └── README.md
+
+  ## Debugging (Keil uVision/JLink) 
+  1. Open Options for Target
+  2. In new windows, choose Target -> ARM Compiler -> Use default compiler version 6
+  3. In C/C++ window -> Language C -> c99
+  4. In Debug window -> Use-> J-Link/J-TRACE Cortex
+  5. Then Settings -> Accept -> Debug window -> Max Clock -> 2MHz 
+  6. Flash Download window-> Reset and Run option 
+  F7- project build
+  F8- loading program on controller 
 
