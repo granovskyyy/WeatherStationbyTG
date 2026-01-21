@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\weatherstation.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\weatherstation.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Mon Jan 19 12:37:34 2026
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Wed Jan 21 17:31:32 2026
 <BR><P>
 <H3>Maximum Stack Usage =        160 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -749,12 +749,14 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[7f]"></a>Measure_Task</STRONG> (Thumb, 120 bytes, Stack size 24 bytes, main.o(.text.Measure_Task))
+<P><STRONG><a name="[7f]"></a>Measure_Task</STRONG> (Thumb, 224 bytes, Stack size 24 bytes, main.o(.text.Measure_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = Measure_Task &rArr; I2C_WriteReg &rArr; i2c_wait
 </UL>
 <BR>[Calls]<UL><LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fmul
 <LI><a href="#[49]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_i2f
 <LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fdiv
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmple
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fcmpge
 <LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_fadd
 <LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_WriteReg
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;I2C_ReadRegBlock
@@ -792,7 +794,7 @@ Global Symbols
 <P><STRONG><a name="[26]"></a>SystemInit</STRONG> (Thumb, 60 bytes, Stack size 0 bytes, system_mkl05z4.o(.text.SystemInit))
 <BR>[Address Reference Count : 1]<UL><LI> startup_mkl05z4.o(.text)
 </UL>
-<P><STRONG><a name="[85]"></a>UI_Task</STRONG> (Thumb, 360 bytes, Stack size 8 bytes, main.o(.text.UI_Task))
+<P><STRONG><a name="[85]"></a>UI_Task</STRONG> (Thumb, 368 bytes, Stack size 8 bytes, main.o(.text.UI_Task))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = UI_Task &rArr; LCD_Task &rArr; __2sprintf &rArr; _printf_char_common &rArr; __printf
 </UL>
@@ -923,7 +925,8 @@ Global Symbols
 <P><STRONG><a name="[7e]"></a>__aeabi_fcmpge</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, fcmp.o(i._fgeq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_fcmpge
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Task
+<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Task
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Task
 </UL>
 
 <P><STRONG><a name="[88]"></a>_fgeq</STRONG> (Thumb, 22 bytes, Stack size 8 bytes, fcmp.o(i._fgeq), UNUSED)
@@ -943,7 +946,8 @@ Global Symbols
 <P><STRONG><a name="[7d]"></a>__aeabi_fcmple</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, fcmp.o(i._fleq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __aeabi_fcmple
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Task
+<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Measure_Task
+<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;LED_Task
 </UL>
 
 <P><STRONG><a name="[8b]"></a>_fleq</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, fcmp.o(i._fleq), UNUSED)

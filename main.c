@@ -65,11 +65,10 @@ int H_min = 30, H_max = 60;
 volatile uint8_t S2_press = 0;
 volatile uint8_t S3_press = 0;
 volatile uint8_t S4_press = 0;
-volatile uint8_t last_user_action=0;
 volatile uint8_t ui_mode = 0;
 volatile uint8_t mode = 0;
-volatile uint8_t block_ui = 0;
-
+uint8_t meas_state = 0;      // 0 = idle, 1 = wait, 2 = read
+uint32_t meas_timer = 0;
 
 float temperature, humidity;
 uint8_t data[6];
@@ -97,14 +96,14 @@ void SysTick_Handler(void)
 }
 
 /* ===== PRZERWANIE PORTA ===== */
-void PORTA_IRQHandler(void)	// Podprogram obs?ugi przerwania od klawiszy S2, S3 i S4
+void PORTA_IRQHandler(void)	// Podprogram obslugi przerwania od klawiszy S2, S3 i S4
 {
 	uint32_t buf;
 	buf=PORTA->ISFR & (S2_MASK | S3_MASK | S4_MASK);
 
 	switch(buf)
 	{
-		case S2_MASK:			// Minimalizacja drga? zestyk?w
+		case S2_MASK:			// Minimalizacja drgan zestykow
 									if(!(PTA->PDIR&S2_MASK))		
 									{
 										if(!S2_press)
@@ -129,7 +128,7 @@ void PORTA_IRQHandler(void)	// Podprogram obs?ugi przerwania od klawiszy S2, S3 
 									break;
 		default:			break;
 	}	
-	PORTA->ISFR |=  S2_MASK | S3_MASK | S4_MASK;	// Kasowanie wszystkich bit?w ISF
+	PORTA->ISFR |=  S2_MASK | S3_MASK | S4_MASK;	// Kasowanie wszystkich bitow ISF
 	NVIC_ClearPendingIRQ(PORTA_IRQn);
 }
 
@@ -179,25 +178,32 @@ void UI_Task(void)
 {
 
     static uint32_t debounce = 0;
-
+		static uint32_t tb =0;
     if(debounce) debounce--;
 
 
     if(S2_press && S3_press)
 		{
+			if(tb==0)
+			{
+				tb=sys_ms;
+			}
+			if(sys_ms-tb>500)
+			{
 				ui_mode = 0;
-				debounce = 100;
 				S2_press = 0;
 				S3_press = 0;
 				S4_press = 0;
+			}
+
 		}
-
-
-    //last_S1 = s1;
+		else
+		{
+			tb=0;
+		}
 
     if(!debounce && S2_press)
     {
-				last_user_action = sys_ms;
         ui_mode = 1;
         mode = (mode + 1) % 4;
         debounce = 100;
@@ -206,7 +212,6 @@ void UI_Task(void)
 
     if(!debounce && ui_mode && S3_press)
     {
-				last_user_action = sys_ms;
         if(mode==0)
 				{
 					if(T_min<TMAXLIMIT && T_min+1<T_max)
@@ -241,7 +246,6 @@ void UI_Task(void)
 
     if(!debounce && ui_mode && S4_press)
     {
-				last_user_action = sys_ms;
         if(mode==0)
 				{
 					if(T_min > TMINLIMIT)
@@ -315,11 +319,11 @@ void LCD_Task(void)
     else
     {
         LCD1602_SetCursor(0,0);
-        sprintf(buf,"T:%2d.%1dC",(int)temperature,(int)(temperature*10)%10);
+        sprintf(buf,"T:%3d.%1dC",(int)temperature,(int)(temperature*10)%10);
         LCD1602_Print(buf);
 
         LCD1602_SetCursor(0,1);
-        sprintf(buf,"H:%2d.%1d%%",(int)humidity,(int)(humidity*10)%10);
+        sprintf(buf,"H:%3d.%1d%%",(int)humidity,(int)(humidity*10)%10);
         LCD1602_Print(buf);
     }
 }
@@ -327,17 +331,43 @@ void LCD_Task(void)
 /* ===== MEASURE TASK ===== */
 void Measure_Task(void)
 {
-    I2C_WriteReg(SHT35_ADDR,0x24,0x00);
-    for(volatile int i=0;i<90000;i++);
+    if(meas_state == 0)
+    {
+        // START pomiaru
+        I2C_WriteReg(SHT35_ADDR, 0x24, 0x00);
+        meas_timer = sys_ms;
+        meas_state = 1;
+    }
+    else if(meas_state == 1)
+    {
+        // CZEKAJ ~5 ms
+        if(sys_ms - meas_timer >= 5)
+        {
+            meas_state = 2;
+        }
+    }
+    else if(meas_state == 2)
+    {
+        // ODCZYT
+        I2C_ReadRegBlock(SHT35_ADDR, 0x00, 6, data);
 
-    I2C_ReadRegBlock(SHT35_ADDR,0x00,6,data);
+        uint16_t rawT = (data[0] << 8) | data[1];
+        uint16_t rawH = (data[3] << 8) | data[4];
 
-    uint16_t rawT = (data[0]<<8)|data[1];
-    uint16_t rawH = (data[3]<<8)|data[4];
+        temperature = -45 + 175.0f * rawT / 65535.0f;
+        humidity    = 100.0f * rawH / 65535.0f;
 
-    temperature = -45 + 175.0f * rawT / 65535.0f;
-    humidity    = 100.0f * rawH / 65535.0f;
+        meas_state = 0;   // wróc do IDLE
+				
+				if(humidity < 0)   humidity = 0;
+				if(humidity > 100) humidity = 100;
+
+				if(temperature < -45) temperature = -45;
+				if(temperature > 125) temperature = 125;
+
+    }
 }
+
 
 /* ===== LED TASK ===== */
 void LED_Task(void)
