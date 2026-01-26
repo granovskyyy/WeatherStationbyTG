@@ -36,18 +36,26 @@ This project implements a compact weather station using an ARM Cortex-M0+ MCU (N
 
 ##  Pinout
 
-| Peripheral | MCU Pin |
-|------------|---------|
-| I2C SDA    | PTB4 (SDA) |
-| I2C SCL    | PTB3 (SCL) |
-| LCD        | PTBx / I2C |
-| S1 Button  | PTA8 (return to main menu) |
-| S2 Button  | PTA10 (navigate / change field) |
-| S3 Button  | PTA11 (increment) |
-| S4 Button  | PTA12 (decrement) |
-| LED R      | PTB8 |
-| LED G      | PTB9 |
-| LED B      | PTB10 |
+| Device / Module    | Device Pin | MCU Pin (MKL05Z4) | Notes               |
+| ------------------ | ---------- | ----------------- | ------------------- |
+| **LCD 1602 (I2C)** | SDA        | PTB4 (SDA)        | I2C data line       |
+|                    | SCL        | PTB3 (SCL)        | I2C clock line      |
+|                    | VCC        | +5V               | LCD power supply    |
+|                    | GND        | GND               | Ground              |
+| **4x4 Keyboard**   | C1         | PTA7              | Column 1            |
+|                    | C2         | PTA10             | Column 2            |
+|                    | C3         | PTA11             | Column 3            |
+|                    | C4         | PTA12             | Column 4            |
+|                    | R1         | GND               | Common ground       |
+| **RGB LED**        | Red        | PTB8              | Red channel         |
+|                    | Green      | PTB9              | Green channel       |
+|                    | Blue       | PTB10             | Blue channel        |
+| **SHT35 Sensor**   | VCC        | +3.3V             | Sensor power supply |
+|                    | GND        | GND               | Ground              |
+|                    | SDA        | PTB4 (SDA)        | I2C data line       |
+|                    | SCL        | PTB3 (SCL)        | I2C clock line      |
+
+All I2C devices (LCD 1602 and SHT35 sensor) share the same I2C bus configured on pins PTB3 (SCL) and PTB4 (SDA).
 
 ---
 ## Block diagram 
@@ -60,7 +68,7 @@ The main loop runs three tasks on timers (using a 1 ms SysTick tick):
 | Task                | Interval | Purpose |
 |---------------------|----------|---------|
 | `UI_Task()`         | 20 ms    | Handles button input and UI state machine |
-| `Measure_Task()`    | 500 ms   | Initiates and reads SHT35 sensor values |
+| `Measure_Task()`    | 200 ms   | Initiates and reads SHT35 sensor values |
 | `LED_Task()`        | 100 ms   | Drives LED alarm logic with blink patterns |
 
 This scheduler model avoids blocking loops (`for` or `delay`) ensuring responsive UI.
@@ -68,11 +76,11 @@ This scheduler model avoids blocking loops (`for` or `delay`) ensuring responsiv
 ---
 
 ##  User Interface
-
+- **S1 button:** exit configuration and return to main measurement screen
 - **S2 button:** navigate through configurable fields (`Tmin`, `Tmax`, `Hmin`, `Hmax`)  
 - **S3 button:** increment current field  
 - **S4 button:** decrement current field  
-- **S2 + S3 together:** exit configuration and return to main measurement screen
+
 
 Value limits are enforced in firmware:
 
