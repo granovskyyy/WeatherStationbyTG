@@ -59,7 +59,8 @@ All I2C devices (LCD 1602 and SHT35 sensor) share the same I2C bus configured on
 
 ---
 ## Block diagram 
-<img width="1196" height="481" alt="image" src="https://github.com/user-attachments/assets/1b45af73-57f6-4515-a4ae-22ceb8d37568" />
+<img width="575" height="496" alt="image" src="https://github.com/user-attachments/assets/519b7d69-899a-4c8d-8440-34cc1d9bb3b4" />
+
 
 ##  Software Architecture
 
@@ -97,12 +98,12 @@ Value limits are enforced in firmware:
 ---
 
 ##  Repository Structure
-  WeatherStationbyTG/
-  ├── main.c # Main application and task scheduler
-  ├── lcd1602.c/.h # LCD driver for 1602 display
-  ├── i2c.c/.h # I2C helper functions
-  ├── Listings/Objects/RTE # Build configurations
-  └── README.md
+WeatherStationbyTG/
+├── main.c # Main application and task scheduler
+├── lcd1602.c/.h # LCD driver for 1602 display
+├── i2c.c/.h # I2C helper functions
+├── Listings/Objects/RTE # Build configurations
+└── README.md
 
   ## Debugging (Keil uVision/JLink) 
   1. Project-> Options for Target
